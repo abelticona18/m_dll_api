@@ -5,7 +5,7 @@ project("m_cpp_haptic")
 option(GEN_DOCS "Generate documentation" OFF)
 option(BUILD_SHARED_LIBS  "Build using shared libraries" ON)
 
-set(OUT_DIR "/out")
+set(OUT_DIR "out")
 
 # add common.cmake
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/" ${CMAKE_MODULE_PATH})
