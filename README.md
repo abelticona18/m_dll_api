@@ -1,5 +1,6 @@
 # API
 - myApi: is a base project to develop external functions and classes and export them as dll library
+- myDemo: is a test project to use dll myApi
 
 ## Build API
 
