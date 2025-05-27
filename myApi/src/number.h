@@ -15,7 +15,14 @@ namespace m_cpp_haptic {
         void print();
     };
 
-    DLL_API Number sumTwoNumbers(Number n1, Number n2);
+    extern "C" {
+    DLL_API Number* CreateNumber(float val);
+    DLL_API void DestroyNumber(Number* number);
+    DLL_API void Print(Number* number);
 
+    DLL_API void SumTwoNumbers(Number* r, Number* n1, Number* n2);
+    DLL_API float Sum(float n1, float n2);
+    }
 }  // namespace m_cpp_haptic
+
 #endif

@@ -16,10 +16,24 @@ namespace m_cpp_haptic {
         std::cout << "val: " << _x << std::endl;
     }
 
-    Number sumTwoNumbers(Number n1, Number n2) {
-        Number n;
-        n.sum(n1);
-        n.sum(n2);
-        return n;
+    Number* CreateNumber(float val) {
+        return new Number(val);
+    }
+
+    void DestroyNumber(Number* number) {
+        delete number;
+    }
+
+     void Print(Number* number) {
+        number->print();
+    }
+
+    void SumTwoNumbers(Number* r, Number* n1, Number* n2) {
+        r->sum(*n1);
+        r->sum(*n2);
+    }
+
+    float Sum(float n1, float n2) {
+        return n1 + n2;
     }
 }  // namespace m_cpp_haptic
