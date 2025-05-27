@@ -1,14 +1,14 @@
 # headers
-file(GLOB_RECURSE MYDEMO__HEADERS src/*.hpp src/*.h)
+file(GLOB_RECURSE DEMOCPP__HEADERS src/*.hpp src/*.h)
 
 # sources
-file(GLOB_RECURSE MYDEMO__SOURCES src/*.cpp src/*.c)
+file(GLOB_RECURSE DEMOCPP__SOURCES src/*.cpp src/*.c)
 
 # executable
-add_executable(myDemo ${MYDEMO__SOURCES} ${MYDEMO__HEADERS})
+add_executable(demoCpp ${DEMOCPP__SOURCES} ${DEMOCPP__HEADERS})
 
 # intern directories
-target_include_directories(myDemo PRIVATE
+target_include_directories(demoCpp PRIVATE
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/src
 	$<INSTALL_INTERFACE:>/src
 )
@@ -23,8 +23,8 @@ set_target_properties(myApiExternal PROPERTIES
 )
 
 # extern libraries
-target_link_libraries(myDemo PRIVATE myApiExternal)
+target_link_libraries(demoCpp PRIVATE myApiExternal)
 
 if(BUILD_SHARED_LIBS )
-	target_compile_definitions(myDemo PRIVATE DLL_TO_SHARE)
+	target_compile_definitions(demoCpp PRIVATE DLL_TO_SHARE)
 endif()

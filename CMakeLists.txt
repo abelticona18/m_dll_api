@@ -16,4 +16,4 @@ include(common)
 # --------------------------------------------------------------
 
 add_subdirectory(myApi)
-add_subdirectory(myDemo)
+add_subdirectory(demoCpp)
