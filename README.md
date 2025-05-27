@@ -1,9 +1,32 @@
 # API
-- myApi: is a base project to develop external functions and classes and export them as dll library
-- myDemo: is a test project to use dll myApi
+
+```
+m_cpp_haptic/
+
+├── demoCpp
+│   ├── CMakeLists.txt
+│   └── src
+├── demoCsharp
+│   ├── demoCsharp.csproj
+│   └── Program.cs
+├── myApi
+│   ├── CMakeLists.txt
+│   └── src
+├── out
+├── CMakeLists.txt
+├── common.cmake
+├── DemoCsharp.sln
+└── README.md
+
+```
+- **myApi**: is a c++ project to develop external functions and classes and export them as dll library
+- **demoCpp**: is a c++ project to test myApi.dll
+- **demoCsharp**: is a c# project to use myApi.dll
+- **out**: contains dlls, libs and headers
 
 ## Pre requirements
-- CMake >=3.5
+- CMake 3.5 <=
+- .NET 6.0 <=
 
 ## Build API
 
@@ -22,8 +45,10 @@ cmake -B build . -DCMAKE_BUILD_TYPE=Release
 vcvars64
 # 2. generate project for nmake files
 cmake -B build . -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release
-# 3. build
-cmake --build ./build
+# 3. build (generate dll)
+cmake --build ./build myApp
+# 4. to generate the headers (only for c++)
+cmake --install ./build
 ```
 
 *Note:* to use vcvars64 you must add the path `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build` in the environment variables
@@ -37,7 +62,18 @@ cmake -B build . -G "Make Makefiles" -DCMAKE_BUILD_TYPE=Release
 cd build && make .
 ```
 
-## Run
+## Build & Run Demos
+### demoCpp
 ```bash
+# build
+cmake --build ./build demoCpp
+# run
 ./out/bin/myDemo.exe
+```
+
+### demoCsharp
+```bash
+cd demoCsharp
+# build & run
+dotnet run
 ```
