@@ -46,7 +46,7 @@ vcvars64
 # 2. generate project for nmake files
 cmake -B build . -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release
 # 3. build (generate dll)
-cmake --build ./build myApp
+cmake --build ./build --target myApi
 # 4. to generate the headers (only for c++)
 cmake --install ./build
 ```
@@ -66,7 +66,7 @@ cd build && make .
 ### demoCpp
 ```bash
 # build
-cmake --build ./build demoCpp
+cmake --build ./build --target demoCpp
 # run
 ./out/bin/myDemo.exe
 ```

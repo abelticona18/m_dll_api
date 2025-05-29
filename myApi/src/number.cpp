@@ -24,8 +24,27 @@ namespace m_cpp_haptic {
         delete number;
     }
 
-     void Print(Number* number) {
+    void Print(Number* number) {
         number->print();
+    }
+
+    int InitData(Number* number, float* vertices, int length) {
+        int size = length * sizeof(float);
+        number->_vertices.resize(length);
+        memcpy(number->_vertices.data(), vertices, size);
+        return size;
+    }
+
+    void UpdateData(Number* number) {
+        float offset = 0.1f;
+        for (auto& v : number->_vertices) {
+            v += offset;
+        }
+    }
+
+    float* GetData(Number* number, int* length) {
+        *length = number->_vertices.size();
+        return number->_vertices.data();
     }
 
     void SumTwoNumbers(Number* r, Number* n1, Number* n2) {
