@@ -1,47 +1,38 @@
-// using System;
 using System.Runtime.InteropServices;
 partial class Program
 {
     [DllImport("..\\out\\bin\\myApi.dll", CallingConvention = CallingConvention.Cdecl)]
-    public static extern IntPtr CreateNumber(float val);
+    public static extern IntPtr CreateInstance(float timestep);
 
     [DllImport("..\\out\\bin\\myApi.dll", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void DestroyNumber(IntPtr p);
+    public static extern void DestroyInstance(IntPtr p);
 
     [DllImport("..\\out\\bin\\myApi.dll", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void Print(IntPtr p);
+    public static extern int InitData(IntPtr p, float[] vertices, int length);
 
     [DllImport("..\\out\\bin\\myApi.dll", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void SumTwoNumbers(IntPtr r, IntPtr n1, IntPtr n2);
-
-    [LibraryImport("..\\out\\bin\\myApi.dll")]
-    public static partial IntPtr GetData(IntPtr p, ref int length);
-
-    [LibraryImport("..\\out\\bin\\myApi.dll")]
-    public static partial int InitData(IntPtr p, float[] vertices, int length);
-
-    [LibraryImport("..\\out\\bin\\myApi.dll")]
-    public static partial void UpdateData(IntPtr p);
+    public static extern IntPtr GetData(IntPtr p);
 
     [DllImport("..\\out\\bin\\myApi.dll", CallingConvention = CallingConvention.Cdecl)]
-    public static extern float Sum(float n1, float n2);
+    public static extern void UpdateData(IntPtr p, float velocity, float period);
 
     static void Main(string[] args)
     {
         // TODO: create a wrapper to Number
-        IntPtr z = CreateNumber(0);
-        int len = 0;
+        IntPtr instance = CreateInstance(0.01f);
         float[] floatArray = [1.0f, 2.0f, 3.0f,
                                 2.0f, 4.0f, 6.0f];
+        float velocity = 0.01f;
+        float period = 0.1f;
 
-        InitData(z, floatArray, floatArray.Length);
+        InitData(instance, floatArray, floatArray.Length);
 
         for (int i = 0; i < 10; i++)
         {
-            UpdateData(z);
+            UpdateData(instance, velocity, period);
 
-            IntPtr dataPtr = GetData(z, ref len);
-            Marshal.Copy(dataPtr, floatArray, 0, len);
+            IntPtr dataPtr = GetData(instance);
+            Marshal.Copy(dataPtr, floatArray, 0, floatArray.Length);
 
             foreach (var item in floatArray)
             {
@@ -50,9 +41,6 @@ partial class Program
             Console.WriteLine();
         }
 
-        float w = Sum(4, 3);
-        Console.WriteLine($"[c#] Sum(float, float): {w}");
-
-        DestroyNumber(z);
+        DestroyInstance(instance);
     }
 }
