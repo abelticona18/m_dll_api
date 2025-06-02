@@ -15,5 +15,6 @@ include(common)
 # project structure
 # --------------------------------------------------------------
 
+add_subdirectory(extern/glfw EXCLUDE_FROM_ALL)
 add_subdirectory(myApi)
 add_subdirectory(demoCpp)
